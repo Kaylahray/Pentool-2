@@ -35,7 +35,7 @@ const App = () => {
           <div className="flex gap-4 p-2">
             <label className="text-white">Stroke Width:</label>
             <input
-              className="p-2"
+              className="p-2  bg-gray-700 text-white rounded-md"
               type="number"
               value={strokeWidth}
               onChange={handleStrokeWidthChange}
