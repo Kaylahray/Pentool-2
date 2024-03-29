@@ -4,9 +4,9 @@ const useDrawingCanvas = () => {
   const [points, setPoints] = useState([]);
   const [shapes, setShapes] = useState([]);
   const [previewPoint, setPreviewPoint] = useState(null);
-  const [fillColor, setFillColor] = useState("#ffffff"); // Default fill color
+  const [fillColor, setFillColor] = useState("#ffffff");
   const [strokeWidth, setStrokeWidth] = useState(2);
-  const [isPenActive, setIsPenActive] = useState(false); // State to track pen activity
+  const [isPenActive, setIsPenActive] = useState(false);
   const canvasRef = useRef(null);
 
   const activatePen = useCallback(() => {
@@ -18,7 +18,7 @@ const useDrawingCanvas = () => {
   };
 
   const handleMouseDown = (event) => {
-    if (!isPenActive) return; // Return if pen is not active
+    if (!isPenActive) return;
     const canvas = canvasRef.current;
     const { left, top } = canvas.getBoundingClientRect();
     const x = event.clientX - left;
@@ -27,7 +27,7 @@ const useDrawingCanvas = () => {
   };
 
   const handleMouseMove = (event) => {
-    if (!isPenActive) return; // Return if pen is not active
+    if (!isPenActive) return;
     if (points.length > 0) {
       const canvas = canvasRef.current;
       const { left, top } = canvas.getBoundingClientRect();
@@ -38,7 +38,7 @@ const useDrawingCanvas = () => {
   };
 
   const handleMouseUp = () => {
-    if (!isPenActive) return; // Return if pen is not active
+    if (!isPenActive) return;
     if (previewPoint && points.length > 0) {
       if (
         Math.abs(points[0].x - previewPoint.x) < 5 &&
@@ -54,7 +54,7 @@ const useDrawingCanvas = () => {
   };
 
   const handleMouseLeave = () => {
-    if (!isPenActive) return; // Return if pen is not active
+    if (!isPenActive) return;
     setPreviewPoint(null);
   };
 
@@ -86,7 +86,6 @@ const useDrawingCanvas = () => {
     const context = canvas.getContext("2d");
     context.clearRect(0, 0, canvas.width, canvas.height);
 
-    // Draw completed shapes
     shapes.forEach((shapePoints) => {
       context.beginPath();
       context.moveTo(shapePoints[0].x, shapePoints[0].y);
@@ -99,11 +98,10 @@ const useDrawingCanvas = () => {
       context.fillStyle = fillColor;
       context.fill();
       context.lineWidth = strokeWidth;
-      context.strokeStyle = "#000"; // Set stroke color to black
+      context.strokeStyle = "#000";
       context.stroke();
     });
 
-    // Draw current shape in progress
     if (points.length > 0) {
       context.beginPath();
       context.moveTo(points[0].x, points[0].y);
@@ -113,25 +111,23 @@ const useDrawingCanvas = () => {
         }
       });
       context.lineWidth = strokeWidth;
-      context.strokeStyle = "#000"; // Set stroke color to black
+      context.strokeStyle = "#000";
       context.stroke();
     }
 
-    // Draw points
-    context.fillStyle = "#000"; // Set point color to black
+    context.fillStyle = "#000";
     points.forEach((point) => {
       context.beginPath();
-      context.arc(point.x, point.y, 4, 0, Math.PI * 2); // Increase radius to 8
+      context.arc(point.x, point.y, 4, 0, Math.PI * 2);
       context.fill();
     });
 
-    // Draw preview line
     if (previewPoint && points.length > 0) {
       const lastPoint = points[points.length - 1];
       context.beginPath();
       context.moveTo(lastPoint.x, lastPoint.y);
       context.lineTo(previewPoint.x, previewPoint.y);
-      context.strokeStyle = "#888"; // Set preview line color to gray
+      context.strokeStyle = "#888";
       context.stroke();
     }
   }, [points, previewPoint, shapes, fillColor, strokeWidth]);
