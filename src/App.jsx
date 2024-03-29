@@ -18,7 +18,7 @@ const App = () => {
 
   return (
     <div className="flex flex-col w-screen h-screen justify-center items-center bg-gray-900">
-      <h1 className="text-white text-center mb-2">
+      <h1 className="text-white text-center mb-4 text-2xl">
         Free Form Path Creation Tool
       </h1>
 
