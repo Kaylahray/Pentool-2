@@ -25,7 +25,7 @@ const App = () => {
         <div className="flex-col">
           <button
             className={`py-2 px-4 rounded-md mb-4 text-white ${
-              isPenActive ? "bg-blue-500" : "bg-gray-200 text-black"
+              isPenActive ? "bg-blue-500" : "bg-black "
             }`}
             onClick={togglePen}
           >
