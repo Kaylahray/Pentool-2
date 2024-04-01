@@ -79,7 +79,7 @@ const useDrawingCanvas = () => {
     return () => {
       window.removeEventListener("keydown", handleKeyPress);
     };
-  }, [isPenActive, points, previewPoint, shapes, activatePen]);
+  }, [activatePen]);
 
   useEffect(() => {
     const canvas = canvasRef.current;
